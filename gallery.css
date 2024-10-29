@@ -1,0 +1,214 @@
+/* Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap');
+
+body {
+    font-family: 'Inknut Antiqua', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 60px;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.logo {
+    width: 80px;
+    margin-left: 4rem;
+}
+
+.nav-links a {
+    color: black;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: yellow;
+}
+
+.flex.mr-16 a {
+    color: black;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.flex.mr-16 a:hover {
+    color: yellow;
+}
+
+.container {
+    max-width: 97%;
+    margin: 2rem auto;
+}
+
+h1 {
+    font-size: 7rem;
+}
+
+.gallery-container {
+    display: grid;
+    gap: 15px; /* Adjust gap between images */
+    max-width: 1700px; /* Max width for larger screens */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Flexible column sizing */
+    overflow: hidden; /* Prevent gallery from being independently scrollable */
+}
+
+.grid-item {
+    position: relative; /* Position relative for overlay */
+    overflow: hidden; /* Hide overflow for rounded corners */
+    transition: transform 0.3s; /* Add transition for hover effect */
+}
+
+.grid-item:hover {
+    transform: scale(1.05); /* Slightly scale image on hover */
+}
+
+.grid-item img,
+.grid-item video {
+    width: 250px; /* Fixed width for images and videos */
+    height: 400px; /* Fixed height for consistency */
+    object-fit: cover; /* Maintain aspect ratio */
+}
+
+/* Overlay style */
+.grid-item::after {
+    content: ''; /* Empty content for the overlay */
+    position: absolute; /* Position absolute for full coverage */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Dark overlay */
+    z-index: 1; /* Overlay above the image */
+}
+
+/* Grainy texture */
+.grid-item img,
+.grid-item video {
+    filter: url(#grain); /* Apply grain effect */
+}
+
+/* Text overlay */
+.image-text {
+    position: absolute; /* Positioning the text */
+    bottom: 10px; /* Adjust bottom spacing */
+    left: 10px; /* Adjust left spacing */
+    color: #ffe01e; /* Text color */
+    padding: 5px 10px; /* Padding around the text */
+    z-index: 2; /* Place text above the overlay */
+    font-size: 1rem; /* Smaller text size */
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3rem; /* Adjust heading size for smaller screens */
+        text-align: center; /* Center-align heading on mobile */
+    }
+
+    .gallery-container {
+        grid-template-columns: 1fr; /* Set to 1 image per row on mobile */
+        padding: 0; /* Remove padding to prevent horizontal overflow */
+        margin: 0 auto; /* Center align the container */
+    }
+
+    .grid-item {
+        margin: 0; /* Remove any margin on grid items */
+    }
+
+    .grid-item img,
+    .grid-item video {
+        width: 100%; /* Ensure images/videos fill the container */
+        height: auto; /* Allow images/videos to resize naturally */
+        display: block; /* Prevent inline-block spacing */
+    }
+
+    .image-text {
+        font-size: 0.8rem; /* Smaller text size for mobile */
+        bottom: 5px; /* Adjust bottom spacing for text */
+        left: 5px; /* Adjust left spacing for text */
+    }
+}
+
+/* Page Wrapper */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+}
+
+.main-content {
+    flex-grow: 1; /* Fills up remaining space */
+}
+
+main {
+    flex: 1; /* Pushes the footer to the bottom */
+}
+
+/* Footer Section */
+.footer-section {
+    background-color: #f5f5f5;
+    color: #000000;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 15rem;
+    padding: 1rem;
+}
+
+/* Existing footer CSS */
+.footer-content {
+    max-width: 97%;
+    margin: 0 auto;
+}
+
+.footer-legal {
+    max-width: 98%;
+    margin: 0 auto;
+    border-top: 1px solid #000000;
+    padding-top: 1rem;
+    color: #b0b0b0;
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-legal a {
+    color: #b0b0b0;
+    font-size: 0.75rem;
+    margin-right: 1rem;
+    transition: color 0.3s;
+}
+
+.footer-legal a:hover {
+    color: #28a745;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .footer-nav {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on larger screens */
+        text-align: center; /* Align text left on desktop */
+    }
+
+    .footer-legal {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+}

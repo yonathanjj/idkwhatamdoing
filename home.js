@@ -1,115 +1,332 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Existing GSAP animations
-    gsap.from(".main-content h1", {
-        duration: 1.5,
-        opacity: 0,
-        y: -50,
-        ease: "bounce"
-    });
-
-    gsap.from(".main-content p", {
-        duration: 1,
-        opacity: 0,
-        delay: 0.5,
-        y: 20
-    });
-
-    gsap.from(".buttons button", {
-        duration: 1,
-        opacity: 0,
-        delay: 1,
-        y: 20,
-        stagger: 0.3
-    });
-
-    gsap.from(".info-text", {
-        duration: 1,
-        opacity: 0,
-        x: -50,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: ".info-section",
-            start: "top 80%",
-            toggleActions: "play none none none"
-        }
-    });
-
-    gsap.from(".info-image img", {
-        duration: 1,
-        opacity: 0,
-        x: 50,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: ".info-section",
-            start: "top 80%",
-            toggleActions: "play none none none"
-        }
-    });
-
-    gsap.from(".card", {
-        duration: 1,
-        opacity: 0,
-        y: 20,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: ".festivals-section",
-            start: "top 80%",
-            toggleActions: "play none none none",
-            stagger: 0.3
-        }
-    });
-
-
-// Select elements
-const cardContainer = document.getElementById("card-container");
-const cards = document.querySelectorAll(".card");
-const cardCount = cards.length;
-let currentIndex = 0;
-
-// Adjust the total number of visible cards based on screen size
-function adjustVisibleCards() {
-    const screenWidth = window.innerWidth;
-    let visibleCount = 3; // Default visible cards
-
-    if (screenWidth >= 768) {
-        visibleCount = 3; // Example: Show 3 cards
-    } else if (screenWidth >= 640) {
-        visibleCount = 2; // Show 2 cards for medium screens
-    } else {
-        visibleCount = 1; // Show 1 card for small screens
-    }
-
-    // Hide all cards and show only the required number
-    cards.forEach((card, index) => {
-        card.style.display = index < visibleCount ? 'block' : 'none';
-    });
+/* Font and base styles */
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap');
+body {
+    font-family: 'Inknut Antiqua', serif;
 }
 
-// Initialize cards visibility
-adjustVisibleCards();
-
-// Move cards left or right
-function moveCards(direction) {
-    if (direction === "right") {
-        currentIndex = (currentIndex + 1) % cardCount;
-    } else {
-        currentIndex = (currentIndex - 1 + cardCount) % cardCount;
-    }
-
-    // Animate the card movement
-    gsap.to(cardContainer, {
-        x: -currentIndex * 290, // Move by card width
-        duration: 0.5,
-        ease: "power2.out"
-    });
+/* Background image */
+.hero {
+    background-image: url('event4.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 }
 
-// Event listeners for icons
-document.querySelector('.icon-right').addEventListener('click', () => moveCards("right"));
-document.querySelector('.icon-left').addEventListener('click', () => moveCards("left"));
+/* Background overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
 
-// Handle window resize to adjust visible cards
-window.addEventListener('resize', adjustVisibleCards);
+/* Navbar styles */
+.navbar {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Ensure the navbar is on top */
+}
+
+.logo {
+    width: 80px;
+    margin-left: 4rem;
+}
+
+.nav-item {
+    color: white;
+    font-weight: bold;
+        font-size: 1.25rem;
+    transition: color 0.3s;
+}
+
+.nav-item:hover {
+    color: yellow;
+}
+
+.flex.mr-16 {
+    margin-right: 4rem;
+}
+
+/* Main content */
+.main-content h1 {
+    font-size: 5rem;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.main-content p {
+    font-size: 1.5rem;
+}
+
+/* Buttons */
+.buttons .info-btn, .tickets-btn {
+    width: 220px;
+    height: 50px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.buttons .info-btn:hover, .tickets-btn:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .logo {
+        width: 50px; /* Shrink logo */
+        margin-left: 0;
+        margin-bottom: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav-item {
+        font-size: 1rem; /* Shrink nav links */
+        margin: 0.5rem 0;
+    }
+
+    .flex.mr-16 {
+        margin-right: 0;
+    }
+
+    .main-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .main-content p {
+        font-size: 1rem;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .buttons .info-btn, .tickets-btn {
+        width: 180px; /* Shrink buttons */
+        height: 40px;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Info Section */
+.info-section {
+    background-color: #252626; /* Background color */
+}
+
+.info-text {
+    margin-left: 4rem;
+    font-size: 20px;
+}
+
+.info-image img {
+    width: 480px;
+    height: 480px;
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+ .info-text {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .info-image img {
+        width: 100%; /* Make image responsive */
+        height: auto;
+    }
+}
 
 
 
+.events-section {
+  padding: 40px;
+  background-color: #252626;
+  text-align: center;
+}
+
+.events-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 10px;
+}
+
+.event-card {
+  width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  position: relative;
+}
+
+.event-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+}
+
+.event-details {
+  padding: 20px;
+  color: #ffffff;
+}
+
+.event-details h3 {
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
+.event-details p {
+  color: #cccccc;
+  margin: 5px 0;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+      border-radius: 30px;
+        justify-content: center; /* Center the buttons horizontally */
+
+
+}
+
+.outline-button {
+  width: 130px;
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+      border-radius: 30px;
+}
+
+.outline-button:hover {
+  background-color: #ffffff;
+  color: #252626;
+}
+
+
+
+
+/* Footer Section */
+.footer-section {
+    background-color: #252626;
+    color: #ffffff;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.footer-content {
+    max-width: 97%;
+    margin: 0 auto;
+}
+
+.footer-logo img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.footer-contact span {
+    font-size: 1rem;
+    display: block;
+}
+
+.footer-social-icons a img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.footer-nav {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 column by default */
+    gap: 1rem;
+    text-align: left;
+}
+
+.footer-nav a {
+    color: #ffffff;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+    color: #28a745;
+}
+
+.footer-legal {
+    max-width: 95%;
+    margin: 0 auto;
+    border-top: 1px solid #ffffff;
+    padding-top: 1rem;
+    color: #b0b0b0; /* Dimmed color */
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-legal a {
+    color: #b0b0b0;
+    font-size: 0.75rem;
+    margin-right: 1rem;
+    transition: color 0.3s;
+}
+
+.footer-legal a:hover {
+    color: #28a745;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .footer-nav {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on larger screens */
+        text-align: center; /* Align text left on desktop */
+    }
+
+    .footer-legal {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+}

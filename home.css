@@ -148,165 +148,95 @@ body {
     }
 }
 
-/* Festivals and Events Section */
-.festivals-section {
-    background-color: #252626;
+
+
+.events-section {
+  padding: 40px;
+  background-color: #252626;
+  text-align: center;
 }
 
-.festivals-section h2 {
-    margin-left: 4rem;
-    font-size: 2rem;
+.events-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #ffffff;
 }
 
-.festivals-section .icon-left, .festivals-section .icon-right {
-    font-size: 2rem;
-    cursor: pointer;
-    transition: color 0.3s;
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 10px;
 }
 
-.festivals-section .icon-left:hover, .festivals-section .icon-right:hover {
-    color: yellow;
+.event-card {
+  width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  position: relative;
 }
 
-.icon-left:hover, .icon-right:hover {
-    color: yellow; /* Change color on hover */
-}
-.cards-container {
-    margin-left: 4rem;
-    margin-right: 4rem;
-    max-width: 90%;
-    display: flex;
-    gap: 1rem; /* Add more gap between cards */
+.event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  position: relative;
 }
 
-.card {
-    position: relative;
-    width: 90%;
-    max-width: 30rem;
-    height: 50vh;
-    border-radius: 10px; /* Add border radius */
-    overflow: hidden; /* Ensure the border-radius is visible */
-    display: flex;
-    align-items: flex-end; /* Align items to the bottom */
-    justify-content: center;
-    transition: transform 0.3s ease;
+.event-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
 }
 
-.card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease; /* Smooth zoom-in effect */
+.event-details {
+  padding: 20px;
+  color: #ffffff;
 }
 
-.card .overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    transition: opacity 0.3s ease;
+.event-details h3 {
+  font-size: 1.5em;
+  color: #ffffff;
 }
 
-.card .content {
-    position: absolute;
-    bottom: 1rem; /* Position content at the bottom */
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem; /* Add more gap between content */
+.event-details p {
+  color: #cccccc;
+  margin: 5px 0;
 }
 
-.card .content h3 {
-    font-size: 1.5rem;
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+      border-radius: 30px;
+        justify-content: center; /* Center the buttons horizontally */
+
+
 }
 
-.card .content p {
-    font-size: 1rem;
+.outline-button {
+  width: 130px;
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+      border-radius: 30px;
 }
 
-.card .content .buttons .info-btn, .card .content .tickets-btn {
-    width: 8rem;
-    height: 2rem;
-    border-radius: 20px;
-    transition: all 0.3s ease;
+.outline-button:hover {
+  background-color: #ffffff;
+  color: #252626;
 }
 
-.card:hover img {
-    transform: scale(1.1); /* Zoom-in effect */
-}
-
-.card:hover .overlay {
-    opacity: 0.7;
-}
-
-.card:hover .content h3, .card:hover .content p, .card:hover .content .buttons {
-    transform: translateY(-0.5rem);
-    transition: all 0.3s ease;
-}
-
-.cards-container .card:not(:hover) {
-    filter: brightness(0.8); /* Darken other cards */
-}
-
-.line {
-    margin-left: 4rem;
-    margin-right: 4rem;
-}
-
-.flex.justify-center {
-    margin-top: 3rem; /* Increase gap below cards */
-}
-
-/* Remove white space scroll */
-html, body {
-    overflow-x: hidden;
-}
-
-/* Responsive styles */
-@media (max-width: 640px) {
-    .festivals-section h2 {
-        margin-left: 2rem;
-        font-size: 1.5rem;
-    }
-
-    .cards-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem; /* Add more gap between cards */
-    }
-
-    .card {
-        width: 90%;
-        height: 30vh;
-    }
-
-    .card .content {
-        bottom: 1rem; /* Position content at the bottom */
-        left: 50%;
-        transform: translateX(-50%);
-        gap: 0.5rem;
-    }
-}
-
-
-
-.music-section .icon-left, .music-section .icon-right {
-    font-size: 2rem;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.music-section .icon-left:hover, .music-section .icon-right:hover {
-    color: yellow;
-}
-
-@media (min-width: 768px) {
-    /* Example: Hide cards when the screen is large */
-    .music-section .card {
-        display: none; /* Adjust based on your logic */
-    }
-}
 
 
 

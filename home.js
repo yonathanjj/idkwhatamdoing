@@ -60,41 +60,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cardsContainer = document.querySelector('.cards-container');
-    const cards = Array.from(cardsContainer.children);
-    const cardCount = 4; // Number of cards to display at once
-    let currentIndex = 0; // To track the current set of cards displayed
+// Select elements
+const cardContainer = document.getElementById("card-container");
+const cards = document.querySelectorAll(".card");
+const cardCount = cards.length;
+let currentIndex = 0;
 
-    // Function to render cards based on the current index
-    const renderCards = () => {
-        // Remove all current cards from the container
-        cardsContainer.innerHTML = '';
+// Adjust the total number of visible cards based on screen size
+function adjustVisibleCards() {
+    const screenWidth = window.innerWidth;
+    let visibleCount = 3; // Default visible cards
 
-        // Get the next set of cards to display
-        const nextCards = cards.slice(currentIndex, currentIndex + cardCount);
+    if (screenWidth >= 768) {
+        visibleCount = 3; // Example: Show 3 cards
+    } else if (screenWidth >= 640) {
+        visibleCount = 2; // Show 2 cards for medium screens
+    } else {
+        visibleCount = 1; // Show 1 card for small screens
+    }
 
-        // Append the next set of cards to the container
-        nextCards.forEach(card => {
-            cardsContainer.appendChild(card);
-        });
-    };
-
-    // Event listeners for the buttons
-    document.querySelector('.icon-left').addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex -= cardCount; // Move back by the card count
-            renderCards(); // Update displayed cards
-        }
+    // Hide all cards and show only the required number
+    cards.forEach((card, index) => {
+        card.style.display = index < visibleCount ? 'block' : 'none';
     });
+}
 
-    document.querySelector('.icon-right').addEventListener('click', () => {
-        if (currentIndex + cardCount < cards.length) {
-            currentIndex += cardCount; // Move forward by the card count
-            renderCards(); // Update displayed cards
-        }
+// Initialize cards visibility
+adjustVisibleCards();
+
+// Move cards left or right
+function moveCards(direction) {
+    if (direction === "right") {
+        currentIndex = (currentIndex + 1) % cardCount;
+    } else {
+        currentIndex = (currentIndex - 1 + cardCount) % cardCount;
+    }
+
+    // Animate the card movement
+    gsap.to(cardContainer, {
+        x: -currentIndex * 290, // Move by card width
+        duration: 0.5,
+        ease: "power2.out"
     });
+}
 
-    // Initial render
-    renderCards();
-});
+// Event listeners for icons
+document.querySelector('.icon-right').addEventListener('click', () => moveCards("right"));
+document.querySelector('.icon-left').addEventListener('click', () => moveCards("left"));
+
+// Handle window resize to adjust visible cards
+window.addEventListener('resize', adjustVisibleCards);
+
+
+

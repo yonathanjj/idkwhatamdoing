@@ -291,6 +291,23 @@ html, body {
 
 
 
+.music-section .icon-left, .music-section .icon-right {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.music-section .icon-left:hover, .music-section .icon-right:hover {
+    color: yellow;
+}
+
+@media (min-width: 768px) {
+    /* Example: Hide cards when the screen is large */
+    .music-section .card {
+        display: none; /* Adjust based on your logic */
+    }
+}
+
 
 
 /* Footer Section */
